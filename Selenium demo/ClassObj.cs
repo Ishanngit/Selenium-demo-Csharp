@@ -4,7 +4,7 @@ using System;
 namespace Selenium_demo
 {
     [TestClass]
-    public class UnitTest1
+    public class ClassObj
     {
         [TestMethod]
         public void TestMethod1()
@@ -13,8 +13,8 @@ namespace Selenium_demo
            
             {
                  
-                UnitTest2 obj = new UnitTest2();
-                UnitTest3 obj1 = new UnitTest3();
+                Obj1 obj = new Obj1();
+                Obj2 obj1 = new Obj2();
                 Console.WriteLine(obj.color);
                 Console.WriteLine(obj1.car);
             }

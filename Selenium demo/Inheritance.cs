@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace Selenium_demo
 {
     [TestClass]
-    public class Inheritance : UnitTest3
+    public class Inheritance : Obj2
     {
         [TestMethod]
         public void Inh()
         {
-            UnitTest3 unit = new UnitTest3();
+            Obj2 unit = new Obj2();
             Console.WriteLine(unit.car);
 
         }

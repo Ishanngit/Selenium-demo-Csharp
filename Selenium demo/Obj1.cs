@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Selenium_demo
 {
-    public class UnitTest3 
-
+    public class Obj1
     {
-        public string car = "ferari";
-}
+        public string color = "red";
+    }
 }
