@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 namespace Selenium_demo
 {
     [TestClass]
-    public class Inheritance : Obj2
+    public class InterfacemMain
     {
         [TestMethod]
-        public void Inh()
-        {
-            Obj2 unit = new Obj2();
-            Console.WriteLine(unit.car);
+        public void Int() 
+        { 
+            Interface3 obj = new Interface3();
+            obj.mymethod();
+            obj.Mymethodtwo();
+
 
         }
-        
     }
 }

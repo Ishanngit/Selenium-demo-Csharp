@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 namespace Selenium_demo
 {
     [TestClass]
-    public class Inheritance : Obj2
+    public class PropertiesMain
     {
         [TestMethod]
-        public void Inh()
+       public void properties()
         {
-            Obj2 unit = new Obj2();
-            Console.WriteLine(unit.car);
-
+            Properties obj = new Properties();
+            obj.Name = "This is property";
+            Console.WriteLine(obj.Name);
         }
-        
     }
 }
+
