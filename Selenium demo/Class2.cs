@@ -8,7 +8,7 @@ namespace Selenium_demo
 {
     public class Class2 : Class1
     {
-        public void Classtest()
+        public void Classtest1()
         {
             Console.WriteLine("This is class test 2 data");
         }
