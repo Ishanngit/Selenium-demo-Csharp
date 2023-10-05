@@ -16,7 +16,7 @@ namespace Selenium
 
         public void StartBrowser()
         {
-            new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+          //  new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
 
@@ -40,8 +40,23 @@ namespace Selenium
             driver.Url = "https://demoqa.com/checkbox";
 
             driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
-
+            //To get text contex
+            String message =  driver.FindElement(By.ClassName("display-result")).Text;
+            TestContext.Progress.WriteLine(message);
             //driver.Close(); // 1 window close single window
+        }
+        [Test]
+            public void LinkText()
+        {
+            driver.Url = "https://demoqa.com/links";
+            //TO store the webelement data in varriable
+          IWebElement lintext =   driver.FindElement(By.LinkText("Home"));
+            // lintext.Click();
+           String hrefatrb =  lintext.GetAttribute("href");
+
+            // Assertion
+            Assert.AreEqual(hrefatrb, hrefatrb);
+            driver.Close();
         }
         [Test]
         public void RadioButton()
@@ -52,5 +67,16 @@ namespace Selenium
 
             //driver.Close(); // 1 window close single window
         }
+
+        [Test]
+            public void StaticDropdown()
+        {
+            driver.Url = "https://demoqa.com/automation-practice-form";
+
+            driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
+
+            //driver.Close(); // 1 window close single window
+        }
+
     }
 }
