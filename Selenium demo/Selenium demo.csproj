@@ -105,6 +105,8 @@
     <Compile Include="Interface2.cs" />
     <Compile Include="Interface3.cs" />
     <Compile Include="InterfacemMain.cs" />
+    <Compile Include="Linq.cs" />
+    <Compile Include="LinqDistinct.cs" />
     <Compile Include="MultipleInheritance.cs" />
     <Compile Include="Polymorphism.cs" />
     <Compile Include="ClassObj.cs" />

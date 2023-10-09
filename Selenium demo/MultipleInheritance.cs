@@ -1,75 +1,91 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
-// single inheritance
-class dep
+namespace Selenium_demo
 {
-    public void inh()
+    [TestClass]
+    // single inheritance
+    class dep
     {
-        Console.WriteLine("This is single inheritance ");
-    }
-}
+        public void inh()
+        {
+            Console.WriteLine("This is single inheritance ");
+        }
 
-class clg : dep
-{
-    public void inh2()
-    {
-        Console.WriteLine("dep is inherited");
-    }
-}
-
-// multi-level inheritance
-class manager : dep
-{
-    public void Run()
-    {
-        Console.WriteLine("Manager calss");
-    }
-}
-
-
-
-
-// multiple inheritance
-interface T1
-{
-    void Method1();
-}
-
-interface T2
-{
-    void Method2();
-}
-
-class newclass : T1, T2
-{
-    public void method()
-    {
-        Console.WriteLine("Method is called.");
+        internal static void inh2()
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public void methodnew()
+    //class clg : dep
+  //  {
+     //   public void inh2()
+      //  {
+      //      Console.WriteLine("dep is inherited");
+      //  }
+  //  }
+
+    // multi-level inheritance
+    class manager : dep
     {
-        Console.WriteLine("method new is called.");
+        public void Run()
+        {
+            Console.WriteLine("Manager calss");
+        }
     }
-}
 
-// main program
-class Program
-{
-    static void Main(string[] args)
+    // multiple inheritance
+    interface T1
     {
-        // single inheritance
-        dep obj = new dep();
-        dep.inh();
-        dep.inh2();
+        void Method1();
+    }
 
-      
+    interface T2
+    {
+        void Method2();
+    }
 
-        // multiple inheritance
-        MyClass myClass = new MyClass();
-        myClass.Method1();
-        myClass.Method2();
+    class newclass : T1, T2
+    {
+        public void method()
+        {
+            Console.WriteLine("Method is called.");
+        }
 
-        
+        public void methodnew()
+        {
+            Console.WriteLine("method new is called.");
+        }
+
+        void T1.Method1()
+        {
+            throw new NotImplementedException();
+        }
+
+        void T2.Method2()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    // main program
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // single inheritance
+            dep obj = new dep();
+           // dep.inh();
+            dep.inh2();
+
+
+
+            // multiple inheritance
+            dep myClass = new dep();
+          //  dep.inh();
+            dep.inh2();
+
+        }
     }
 }

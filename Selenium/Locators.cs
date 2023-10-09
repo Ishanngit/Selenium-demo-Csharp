@@ -16,7 +16,7 @@ namespace Selenium
 
         public void StartBrowser()
         {
-          //  new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+          //      new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
 
@@ -55,7 +55,7 @@ namespace Selenium
            String hrefatrb =  lintext.GetAttribute("href");
 
             // Assertion
-            Assert.AreEqual(hrefatrb, hrefatrb);
+            //Assert.AreEqual(hrefatrb, hrefatrb);
             driver.Close();
         }
         [Test]
