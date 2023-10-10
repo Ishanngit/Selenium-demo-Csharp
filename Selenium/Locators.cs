@@ -24,6 +24,7 @@ namespace Selenium
         [Test]
         public void TextBox()
         {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
             driver.Url = "https://demoqa.com/text-box";
 
             driver.FindElement(By.Id("userName")).SendKeys("Ishan");
@@ -38,12 +39,12 @@ namespace Selenium
         public void CheckBox()
         {
             driver.Url = "https://demoqa.com/checkbox";
-
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
             driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
             //To get text contex
             String message =  driver.FindElement(By.ClassName("display-result")).Text;
             TestContext.Progress.WriteLine(message);
-            //driver.Close(); // 1 window close single window
+            driver.Close(); // 1 window close single window
         }
         [Test]
             public void LinkText()
@@ -62,20 +63,21 @@ namespace Selenium
         public void RadioButton()
         {
             driver.Url = "https://demoqa.com/radio-button";
-
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
             driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
 
-            //driver.Close(); // 1 window close single window
+            driver.Close(); // 1 window close single window
         }
 
         [Test]
             public void StaticDropdown()
         {
+          
             driver.Url = "https://demoqa.com/automation-practice-form";
-
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
 
-            //driver.Close(); // 1 window close single window
+            driver.Close(); // 1 window close single window
         }
 
     }

@@ -39,7 +39,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>Selenium_demo.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Docker.DotNet, Version=3.125.0.0, Culture=neutral, PublicKeyToken=e628c633e2cf4146, processorArchitecture=MSIL">
@@ -100,6 +100,7 @@
     <Compile Include="Class2.cs" />
     <Compile Include="Class3.cs" />
     <Compile Include="Constructor.cs" />
+    <Compile Include="ExceptionHandling.cs" />
     <Compile Include="Inheritance.cs" />
     <Compile Include="Interface.cs" />
     <Compile Include="Interface2.cs" />

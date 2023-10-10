@@ -23,7 +23,7 @@ namespace Selenium
         {
             driver.Url = "https://demoqa.com/automation-practice-form";
             //driver.Title;
-            TestContext.Progress.WriteLine(driver.Title);
+            TestContext.Progress.WriteLine(driver.Title);   
             TestContext.Progress.WriteLine(driver.Url);
 
            // driver.Quit(); // 2 window close (multiple window)

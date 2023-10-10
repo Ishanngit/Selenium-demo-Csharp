@@ -11,6 +11,7 @@ namespace Selenium_demo
     public class Polymorphism
     {
         [TestMethod]
+
         public void testPolymorphism() 
         {
             Class1 class1 = new Class1();
