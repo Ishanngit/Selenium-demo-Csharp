@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebDriverManager.DriverConfigs.Impl;
+using OpenQA.Selenium.Support.UI;
+
+    
 
 namespace Selenium
 {
@@ -39,10 +42,14 @@ namespace Selenium
         public void CheckBox()
         {
             driver.Url = "https://demoqa.com/checkbox";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+
+            // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+            WebDriverWait wait = new WebDriverWait(driver,TimeSpan.FromSeconds(20));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")));
+
             driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
             //To get text contex
-            String message =  driver.FindElement(By.ClassName("display-result")).Text;
+            String message =  driver.FindElement(By.ClassName("diswplay-result")).Text;
             TestContext.Progress.WriteLine(message);
             driver.Close(); // 1 window close single window
         }
@@ -63,19 +70,19 @@ namespace Selenium
         public void RadioButton()
         {
             driver.Url = "https://demoqa.com/radio-button";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
             driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
 
             driver.Close(); // 1 window close single window
         }
 
         [Test]
-            public void StaticDropdown()
+         public void StaticDropdown()
         {
           
             driver.Url = "https://demoqa.com/automation-practice-form";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
+            driver.FindElement(By.XPath("//div[@class='subjects-auto-complete__value-container subjects-auto-complete__value-container--is-multi css-1hwfws3']")).SendKeys("maths");
 
             driver.Close(); // 1 window close single window
         }
