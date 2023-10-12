@@ -32,7 +32,7 @@ namespace Selenium
             IWebElement radio =  driver.FindElement(By.XPath("//input[@id='gender-radio-1']"));
             radio.Click();
                         
-              // driver.Close(); // 1 window close single window
+            // driver.Close(); // 1 window close single window
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Selenium
             driver.FindElement(By.Id("currentAddress")).SendKeys("5th floor simform slutions");
             driver.FindElement(By.Id("submit")).Submit();
 
-              driver.Close(); // 1 window close single window
+            driver.Quit();
         }
         [Test]
         public void CheckBox()
@@ -44,47 +44,68 @@ namespace Selenium
             driver.Url = "https://demoqa.com/checkbox";
 
             // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-            WebDriverWait wait = new WebDriverWait(driver,TimeSpan.FromSeconds(20));
+            WebDriverWait wait = new WebDriverWait(driver,TimeSpan.FromSeconds(200));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")));
 
             driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
             //To get text contex
-            String message =  driver.FindElement(By.ClassName("diswplay-result")).Text;
+            String message =  driver.FindElement(By.ClassName("display-result")).Text;
             TestContext.Progress.WriteLine(message);
-            driver.Close(); // 1 window close single window
+            driver.Quit();
         }
         [Test]
-            public void LinkText()
+         public void LinkText()
         {
+          
             driver.Url = "https://demoqa.com/links";
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.LinkText("Home")));
+
+
             //TO store the webelement data in varriable
-          IWebElement lintext =   driver.FindElement(By.LinkText("Home"));
-            // lintext.Click();
+            IWebElement lintext =   driver.FindElement(By.LinkText("Home"));
+            lintext.Click();
            String hrefatrb =  lintext.GetAttribute("href");
 
             // Assertion
-            //Assert.AreEqual(hrefatrb, hrefatrb);
-            driver.Close();
+          //  Assert.AreEqual(hrefatrb, hrefatrb);
+            driver.Quit();
         }
         [Test]
         public void RadioButton()
         {
             driver.Url = "https://demoqa.com/radio-button";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
-            driver.FindElement(By.XPath("//div[@id='tree-node']//span//span[1]//*[name()='svg']")).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//label[@class='custom-control-label']")));
 
-            driver.Close(); // 1 window close single window
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
+            driver.FindElement(By.XPath("//label[@class='custom-control-label']")).Click();
+
+            driver.Quit();
+
         }
 
-        [Test]
-         public void StaticDropdown()
-        {
-          
-            driver.Url = "https://demoqa.com/automation-practice-form";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
-            driver.FindElement(By.XPath("//div[@class='subjects-auto-complete__value-container subjects-auto-complete__value-container--is-multi css-1hwfws3']")).SendKeys("maths");
 
-            driver.Close(); // 1 window close single window
+
+        [Test]
+        public void AutoSuggestiveDropdown()
+        {
+           
+            driver.Url = "https://demoqa.com/automation-practice-form";
+        
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(600));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//input[@id ='subjectsInput']")));
+
+            //scroll
+            IWebElement scroll = driver.FindElement(By.XPath("//input[@id ='subjectsInput']"));
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
+
+            driver.FindElement(By.XPath("//input[@id ='subjectsInput']")).SendKeys("Maths");
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.FindElement(By.XPath("//div[text()='Maths']")).Click();
+            driver.Quit(); // 1 window close single window
         }
 
     }
