@@ -64,6 +64,34 @@ namespace Selenium
             TestContext.Progress.WriteLine(message);
             driver.Quit();
         }
+        [Test]
+        public void StringSplit()
+        {
+
+            driver.Url = "https://demo.automationtesting.in/Windows.html";
+
+            driver.FindElement(By.XPath("//button[@class='btn btn-info']")).Click();
+            String parentwindowhandle = driver.CurrentWindowHandle;
+
+            //changing window
+            String childwindow = driver.WindowHandles[1];
+            driver.SwitchTo().Window(childwindow);
+
+            String message = driver.FindElement(By.XPath("//h1[@class='d-1 fw-bold']")).Text;
+            TestContext.Progress.WriteLine(message);
+            //Spliting the text "Selenium automates browsers. That's it!"
+
+            String[] splittedText =  message.Split("automates");
+
+           // splittedText[1]
+
+            String[] trimmedString =  splittedText[1].Trim().Split(" ");
+            //switch back to parent window
+            driver.SwitchTo().Window(parentwindowhandle);
+           String message1=  driver.FindElement(By.XPath("//div[@class='col-sm-8 col-xs-8 col-md-8']")).Text;
+            TestContext.Progress.WriteLine(message1);
+            driver.Quit();
+        }
 
     }
 }

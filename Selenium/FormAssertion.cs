@@ -16,7 +16,7 @@ namespace Selenium
 
         public void StartBrowser()
         {
-            new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+            //new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
 

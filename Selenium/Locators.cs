@@ -93,8 +93,8 @@ namespace Selenium
            
             driver.Url = "https://demoqa.com/automation-practice-form";
         
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(600));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//input[@id ='subjectsInput']")));
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(600));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//input[@id ='subjectsInput']")));
 
             //scroll
             IWebElement scroll = driver.FindElement(By.XPath("//input[@id ='subjectsInput']"));
