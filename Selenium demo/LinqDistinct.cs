@@ -18,7 +18,7 @@ namespace Selenium_demo
             List<int> Numbers = new List<int>() {
 
                 10,20,20,30,40,40,10,50,60
-    };
+       };
 
             var result = Numbers.Distinct();
 
