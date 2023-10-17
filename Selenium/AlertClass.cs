@@ -64,7 +64,7 @@ namespace Selenium
             driver.Url = "https://demoqa.com/alerts";
 
 
-            driver.FindElement(By.XPath("//button[@id='promtButton']")).Click();
+            driver.FindElement(By.XPath("//button[@id='promtButton']")).Click();    
             driver.SwitchTo().Alert().SendKeys("This is ishan");
             driver.SwitchTo().Alert().Accept();
             driver.Close();
