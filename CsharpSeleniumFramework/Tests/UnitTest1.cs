@@ -8,11 +8,44 @@ using System.Threading.Tasks;
 using WebDriverManager.DriverConfigs.Impl;
 using OpenQA.Selenium.Support.UI;
 using CsharpSeleniumFramework.Utilities;
+using CsharpSeleniumFramework.PageObject;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CsharpSeleniumFramework.Tests
 {
     internal class AddCart : BaseClass
     {
+        //global level data 
+              [Test, TestCaseSource("AddTestDataConfig")]
+
+        //  DataAttribute driven 
+
+        //[TestCase("student", "Password123")]
+        // [TestCase("student1", "Password123")]
+
+        //run all data sets parellel
+        //run all tests method in one class parellel
+        //run all tests files in project parellel
+
+        [Parallelizable(ParallelScope.All)]
+            public void Login(string username , string password)
+        {
+            // Navigate to browser
+            driver.Url = "https://practicetestautomation.com/practice-test-login/";
+
+            
+            //Wait untill page load
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("username")));
+
+            
+
+            LoginPage loginPage = new LoginPage(getDriver());
+            loginPage.validlogin(username, password);
+
+
+        }
 
         [Test]
         public void Cart()
@@ -28,8 +61,7 @@ namespace CsharpSeleniumFramework.Tests
 
             // IList<IWebElement> products =  driver.FindElements(By.TagName("h3"));
             IWebElement products = driver.FindElement(By.TagName("h3"));
-
-          
+            
             if (products != null)
             {
                 // Product name is present on the page
@@ -58,7 +90,18 @@ namespace CsharpSeleniumFramework.Tests
             driver.Navigate().Refresh();
             driver.FindElement(By.XPath("//a[contains(@class,'checkout-button')]")).Click();
             //Thread.Sleep(1000);
+
             
+
+
+        }
+        public static IEnumerable<TestCaseData> AddTestDataConfig()
+        {
+            //yield return new TestCaseData("student", "Password123");
+           
+            yield return new TestCaseData(getDataParser().extractData("username"), getDataParser().extractData("password"));
+           yield return new TestCaseData("student11", "Passworda12a3");
+
         }
     }
 }

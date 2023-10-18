@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
 using System.Configuration;
+using CsharpSeleniumFramework.TestData;
 
 namespace CsharpSeleniumFramework.Utilities
 {
@@ -24,6 +25,11 @@ namespace CsharpSeleniumFramework.Utilities
             driver.Manage().Window.Maximize();
 
         }
+        public IWebDriver getDriver()
+        {
+            return driver;
+        }
+
         public void InitBrowser(string browserName)
         {   
             switch(browserName)
@@ -42,6 +48,10 @@ namespace CsharpSeleniumFramework.Utilities
             }
                 
 
+        }
+        public static JsonReader getDataParser()
+        {
+            return new JsonReader();
         }
         [TearDown]
         
