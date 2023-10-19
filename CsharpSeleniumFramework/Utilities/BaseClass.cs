@@ -9,41 +9,76 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
 using System.Configuration;
 using CsharpSeleniumFramework.TestData;
+using System.Threading;
+using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports;
+using ICSharpCode.SharpZipLib.Zip;
+using NUnit.Framework.Interfaces;
+using OpenQA.Selenium.DevTools.V116.Page;
+
+
 
 namespace CsharpSeleniumFramework.Utilities
 {
     internal class BaseClass
     {
-        public IWebDriver driver;
+        ExtentReports extent;
+        ExtentTest test;
+        String browserName;
+
+
+        //Report file 
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            string reportPath = projectDirectory + "//index.html";
+            var htmlreporter =  new ExtentHtmlReporter(reportPath);
+            extent.AttachReporter(htmlreporter);
+            extent.AddSystemInfo("Host name", "Local Host");
+            extent.AddSystemInfo("Environment", "QA");
+            extent.AddSystemInfo("Username ", "Ishan");
+        }
+       // public IWebDriver driver;
+        public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
         [SetUp]
 
         public void StartBrowser()
         {
+           test =  extent.CreateTest(TestContext.CurrentContext.Test.Name);
             //configuration
-            String browserName = ConfigurationManager.AppSettings["Browser"];
+            browserName = TestContext.Parameters["browserName"];
+            if(browserName == null)
+            {
+                browserName = ConfigurationManager.AppSettings["Browser"];
+
+            }
+
+            
             InitBrowser(browserName);
-            driver.Manage().Window.Maximize();
+            driver.Value.Manage().Window.Maximize();
 
         }
         public IWebDriver getDriver()
         {
-            return driver;
+            return driver.Value;
         }
 
         public void InitBrowser(string browserName)
         {   
             switch(browserName)
             {
-                case "Firefox":
-                        driver = new FirefoxDriver();
+                case "  ":
+                        driver.Value = new FirefoxDriver();
                         break;
 
                 case "Chrome":
-                        driver = new ChromeDriver();
+                        driver.Value = new ChromeDriver();
                         break;
                         
                 case "Edge":
-                        driver = new EdgeDriver();
+                        driver.Value = new EdgeDriver();
                         break;
             }
                 
@@ -57,7 +92,31 @@ namespace CsharpSeleniumFramework.Utilities
         
         public void StopBrowser()
         {
-            driver.Close();
+           var status =  TestContext.CurrentContext.Result.Outcome.Status;
+
+            if(status == NUnit.Framework.Interfaces.TestStatus.Failed)
+            {
+              //  test.Fail("Test failed", screenshot);
+            }
+            else if (status == NUnit.Framework.Interfaces.TestStatus.Passed)
+            {
+
+            }
+            driver.Value.Close();
+
         }
+
+       /* public MediaEntityModelProvider captureScreenShot(IWebDriver driver, String screenShotName)
+
+        {
+            ITakesScreenshot ts = (ITakesScreenshot)driver;
+            var screenshot = ts.GetScreenshot().AsBase64EncodedString;
+
+          //  return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
+
+
+
+
+        }*/
     }
 }

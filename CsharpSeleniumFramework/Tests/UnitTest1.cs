@@ -15,28 +15,32 @@ namespace CsharpSeleniumFramework.Tests
 {
     internal class AddCart : BaseClass
     {
-        //global level data 
+       
               [Test, TestCaseSource("AddTestDataConfig")]
 
-        //  DataAttribute driven 
+       
 
         //[TestCase("student", "Password123")]
         // [TestCase("student1", "Password123")]
 
         //run all data sets parellel
-        //run all tests method in one class parellel
-        //run all tests files in project parellel
 
-        [Parallelizable(ParallelScope.All)]
-            public void Login(string username , string password)
+         [Parallelizable(ParallelScope.All)]
+        //run all tests method in one class parellel
+
+        //[Parallelizable(ParallelScope.Children)]
+        //run all tests files in project parellel
+      //  [Parallelizable(ParallelScope.Self)]
+
+        public void Login(string username , string password)
         {
             // Navigate to browser
-            driver.Url = "https://practicetestautomation.com/practice-test-login/";
+            driver.Value.Url = "https://practicetestautomation.com/practice-test-login/";
 
             
             //Wait untill page load
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
+            WebDriverWait wait = new WebDriverWait(driver.Value, TimeSpan.FromSeconds(200));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("username")));
 
             
@@ -48,19 +52,19 @@ namespace CsharpSeleniumFramework.Tests
         }
 
         [Test]
-        public void Cart()
+            public void Cart()
         {
             // Navigate to browser
-            driver.Url = "https://practice.automationtesting.in/";
+            driver.Value.Url = "https://practice.automationtesting.in/";
 
             string[] ExpectedProducts = { "HTML5 Forms,Android Quick Start Guide" };
             //Wait untill page load
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
+            WebDriverWait wait = new WebDriverWait(driver.Value, TimeSpan.FromSeconds(200));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//span[@class='cartcontents']")));
 
             // IList<IWebElement> products =  driver.FindElements(By.TagName("h3"));
-            IWebElement products = driver.FindElement(By.TagName("h3"));
+            IWebElement products = driver.Value.FindElement(By.TagName("h3"));
             
             if (products != null)
             {
@@ -73,23 +77,23 @@ namespace CsharpSeleniumFramework.Tests
                 Console.WriteLine("Product name is not present.");
             }
             //scroll
-            IWebElement scroll = driver.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']"));
+            IWebElement scroll = driver.Value.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']"));
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
 
-            driver.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']")).Click();
-            driver.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
-            driver.Navigate().Refresh();
+            driver.Value.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']")).Click();
+            driver.Value.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
+            driver.Value.Navigate().Refresh();
 
 
             //cart verificaion
 
-            driver.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
+            driver.Value.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
             //driver.Navigate().Refresh();
-            IWebElement cartproduct = driver.FindElement(By.XPath("//td[@class='product-name']"));
-            driver.Navigate().Refresh();
-            driver.FindElement(By.XPath("//a[contains(@class,'checkout-button')]")).Click();
-            //Thread.Sleep(1000);
+            IWebElement cartproduct = driver.Value.FindElement(By.XPath("//td[@class='product-name']"));
+            driver.Value.Navigate().Refresh();
+            driver.Value.FindElement(By.XPath("//a[contains(@class,'checkout-button')]")).Click();
+             //Thread.Sleep(1000);
 
             
 
