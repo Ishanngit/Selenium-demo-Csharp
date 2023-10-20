@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Selenium_demo
 {
     [TestClass]
-    internal class SelectMany
+    public class SelectMany
     {
         [TestMethod]
         public void linqtest()

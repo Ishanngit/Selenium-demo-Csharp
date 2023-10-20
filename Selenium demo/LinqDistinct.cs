@@ -13,7 +13,8 @@ namespace Selenium_demo
     public class LinqDistinct
     {
 
-  public static void Main(string[] args)
+        [TestMethod]
+  public  void linq()
         {
             List<int> Numbers = new List<int>() {
 

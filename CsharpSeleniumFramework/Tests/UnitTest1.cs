@@ -9,7 +9,9 @@ using WebDriverManager.DriverConfigs.Impl;
 using OpenQA.Selenium.Support.UI;
 using CsharpSeleniumFramework.Utilities;
 using CsharpSeleniumFramework.PageObject;
-using System.Security.Cryptography.X509Certificates;
+using OpenQA.Selenium.Interactions;
+using Microsoft.VisualBasic;
+
 
 namespace CsharpSeleniumFramework.Tests
 {
@@ -77,8 +79,9 @@ namespace CsharpSeleniumFramework.Tests
                 Console.WriteLine("Product name is not present.");
             }
             //scroll
+            
             IWebElement scroll = driver.Value.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']"));
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver.Value;
             js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
 
             driver.Value.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']")).Click();
@@ -103,7 +106,7 @@ namespace CsharpSeleniumFramework.Tests
         {
             //yield return new TestCaseData("student", "Password123");
            
-            yield return new TestCaseData(getDataParser().extractData("username"), getDataParser().extractData("password"));
+           yield return new TestCaseData(getDataParser().extractData("username"), getDataParser().extractData("password"));
            yield return new TestCaseData("student11", "Passworda12a3");
 
         }

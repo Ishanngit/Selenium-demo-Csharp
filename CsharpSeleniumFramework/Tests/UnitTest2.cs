@@ -9,7 +9,7 @@ using WebDriverManager.DriverConfigs.Impl;
 using OpenQA.Selenium.Support.UI;
 using CsharpSeleniumFramework.Utilities;
 using CsharpSeleniumFramework.PageObject;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace CsharpSeleniumFramework.Tests
 {

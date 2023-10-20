@@ -71,7 +71,7 @@ namespace Selenium
             String hrefatrb = lintext.GetAttribute("href");
 
             // Assertion
-            //  Assert.AreEqual(hrefatrb, hrefatrb);
+             Assert.AreEqual(hrefatrb, hrefatrb);
             driver.Quit();
         }
         [Test]
