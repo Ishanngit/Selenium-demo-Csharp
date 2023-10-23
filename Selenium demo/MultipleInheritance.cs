@@ -36,17 +36,17 @@ namespace Selenium_demo
     }
 
     // multiple inheritance
-    interface T1
+    interface Test1
     {
         void Method1();
     }
 
-    interface T2
+    interface Test2
     {
         void Method2();
     }
 
-    class newclass : T1, T2
+    class newclass : Test1, Test2
     {
         public void method()
         {
@@ -58,12 +58,12 @@ namespace Selenium_demo
             Console.WriteLine("method new is called.");
         }
 
-        void T1.Method1()
+        void Test1.Method1()
         {
             throw new NotImplementedException();
         }
 
-        void T2.Method2()
+        void Test2.Method2()
         {
             throw new NotImplementedException();
         }

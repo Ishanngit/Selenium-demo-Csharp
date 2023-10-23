@@ -35,8 +35,8 @@ namespace Selenium_demo
         }
         static void Main(string[] args)
         {
-            DivNumbers d = new DivNumbers();
-            d.division(25, 0);
+            DivNumbers div = new DivNumbers();
+            div.division(25, 0);
             Console.ReadKey();
         }
     }

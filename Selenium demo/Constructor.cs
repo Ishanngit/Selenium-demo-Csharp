@@ -17,8 +17,8 @@ namespace Selenium_demo
         [TestMethod]
         public void test()
         {
-            Constructor c1 = new Constructor();
-            Console.WriteLine(c1.model);
+            Constructor cons = new Constructor();
+            Console.WriteLine(cons.model);
 
         }
 

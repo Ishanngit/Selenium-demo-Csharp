@@ -29,12 +29,12 @@ namespace Selenium
       
             driver.Url = "https://www.rahulshettyacademy.com/";
             //actions class example
-           Actions a = new Actions(driver);
+           Actions act = new Actions(driver);
             // move to element comes from actions class
 
-           a.MoveToElement(driver.FindElement(By.CssSelector("a.dropdown-toggle"))).Perform();
+            act.MoveToElement(driver.FindElement(By.CssSelector("a.dropdown-toggle"))).Perform();
             //driver.FindElement(By.XPath("//ul[@class='dropdown-menu']/li[1]/a")).Click();
-            a.MoveToElement(driver.FindElement(By.XPath("//ul[@class='dropdown-menu']/li[1]/a"))).Click().Perform();
+            act.MoveToElement(driver.FindElement(By.XPath("//ul[@class='dropdown-menu']/li[1]/a"))).Click().Perform();
             driver.Quit();
         }
         [Test]

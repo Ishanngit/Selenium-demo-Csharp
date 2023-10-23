@@ -15,8 +15,8 @@ namespace Selenium_demo
        public void test()
         {
             Console.WriteLine("TEsting");
-            int i = 5;
-            Console.WriteLine("This is con data"+i);
+            int test = 5;
+            Console.WriteLine("This is con data"+ test);
 
             String name = "Ishaan";
 
