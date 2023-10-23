@@ -54,6 +54,7 @@ namespace Selenium
             //To get text contex
             String message = driver.FindElement(By.ClassName("display-result")).Text;
             TestContext.Progress.WriteLine(message);
+
             driver.Quit();
         }
         [Test]
@@ -72,6 +73,8 @@ namespace Selenium
 
             // Assertion
              Assert.AreEqual(hrefatrb, hrefatrb);
+            //assetion not equal
+            Assert.AreNotEqual("Test",hrefatrb);
             driver.Quit();
         }
         [Test]
@@ -83,6 +86,8 @@ namespace Selenium
 
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
             driver.FindElement(By.XPath("//label[@class='custom-control-label']")).Click();
+
+            Assert.IsTrue((driver.FindElement(By.XPath("//label[@class='custom-control-label']"))).Displayed, "The sample element is not displayed.");
 
             driver.Quit();
 
@@ -182,10 +187,10 @@ namespace Selenium
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(600));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("dateOfBirthInput")));
 
-            IWebElement datePickerInput = driver.FindElement(By.Id("datepickerInput"));
+            IWebElement datePickerInput = driver.FindElement(By.Id("dateOfBirthInput"));
             datePickerInput.Click();
             
-            IWebElement targetDateElement = driver.FindElement(By.XPath("//td[@data-date='1']")); 
+            IWebElement targetDateElement = driver.FindElement(By.XPath("//div[contains(@aria-label,'Choose Sunday, October 1st, 2023')]")); 
             targetDateElement.Click();
 
 

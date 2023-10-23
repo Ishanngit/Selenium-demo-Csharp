@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WebDriverManager.DriverConfigs.Impl;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
+using static System.Net.WebRequestMethods;
 
 namespace Selenium
 {
@@ -43,8 +44,8 @@ namespace Selenium
             
             driver.Url = "https://demoqa.com/droppable";
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(50);
-            Actions a = new Actions(driver);
-            a.DragAndDrop(driver.FindElement(By.Id("draggable")),(driver.FindElement(By.Id("droppable")))).Perform();
+            Actions act = new Actions(driver);
+            act.DragAndDrop(driver.FindElement(By.Id("draggable")),(driver.FindElement(By.Id("droppable")))).Perform();
             driver.Quit();
         }
 
@@ -92,6 +93,56 @@ namespace Selenium
             TestContext.Progress.WriteLine(message1);
             driver.Quit();
         }
+        [Test]
+            public void NewTabMessage()
+        {
 
-    }
+            driver.Url = "https://demoqa.com/browser-windows";
+
+            driver.FindElement(By.Id("tabButton")).Click();
+            
+
+            String message = driver.FindElement(By.Id("sampleHeading")).Text;
+            TestContext.Progress.WriteLine(message);
+            driver.Quit();
+        }
+        [Test]
+        public void PopUpWindow()
+        {
+
+            driver.Url = "https://demoqa.com/browser-windows";
+
+            driver.FindElement(By.Id("messageWindowButton")).Click();
+            Assert.AreEqual(2, driver.WindowHandles.Count);
+            //changing window
+            String childwindow = driver.WindowHandles[1];
+            driver.SwitchTo().Window(childwindow);
+
+            string text = driver.FindElement(By.Id("sampleHeading")).Text;
+
+            TestContext.Progress.WriteLine(text);
+
+            driver.Quit();
+            }
+
+            [Test]
+            public void PopupAssertion()
+        {
+
+                driver.Url = "https://demoqa.com/alerts";
+
+                driver.FindElement(By.Id("promtButton")).Click();
+            driver.SwitchTo().Alert().SendKeys("This is ishan");
+            driver.SwitchTo().Alert().Accept();
+            
+            String message = driver.FindElement(By.Id("promptResult")).Text;
+            TestContext.Progress.WriteLine(message);
+
+            Assert.AreEqual("You entered This is ishan", message);
+
+
+            driver.Quit();
+            }
+
+        }
 }
