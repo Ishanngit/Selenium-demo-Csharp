@@ -62,9 +62,11 @@ namespace Selenium
 
             //cart verificaion
             driver.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
-
-            IWebElement cartproduct = driver.FindElement(By.XPath("//td[@class='product-name']"));
-
+            driver.Navigate().Refresh();
+            IWebElement cartproduct = driver.FindElement(By.XPath("//a[@class='wpmenucart-contents']"));
+            IWebElement scroll = driver.FindElement(By.XPath("//a[contains(@class,'checkout-button')]"));
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
             driver.FindElement(By.XPath("//a[contains(@class,'checkout-button')]")).Click();
             //Thread.Sleep(1000);
             driver.Close(); 

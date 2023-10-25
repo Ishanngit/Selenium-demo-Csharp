@@ -100,7 +100,8 @@ namespace Selenium
             driver.Url = "https://demoqa.com/browser-windows";
 
             driver.FindElement(By.Id("tabButton")).Click();
-            
+            String childwindow = driver.WindowHandles[1];
+            driver.SwitchTo().Window(childwindow);
 
             String message = driver.FindElement(By.Id("sampleHeading")).Text;
             TestContext.Progress.WriteLine(message);
@@ -115,6 +116,7 @@ namespace Selenium
             driver.FindElement(By.Id("messageWindowButton")).Click();
             Assert.AreEqual(2, driver.WindowHandles.Count);
             //changing window
+          
             String childwindow = driver.WindowHandles[1];
             driver.SwitchTo().Window(childwindow);
 

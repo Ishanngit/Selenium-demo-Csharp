@@ -29,10 +29,10 @@ namespace Selenium
             driver.FindElement(By.Id("firstName")).SendKeys("Ishan");
             driver.FindElement(By.Id("lastName")).SendKeys("Nayak");
             driver.FindElement(By.Id("userEmail")).SendKeys("ishan.n@simformsolutions.com");
-            IWebElement radio =  driver.FindElement(By.XPath("//input[@id='gender-radio-1']"));
-            radio.Click();
+           
+            
                         
-            // driver.Close(); // 1 window close single window
+            driver.Quit(); 
         }
     }
 }

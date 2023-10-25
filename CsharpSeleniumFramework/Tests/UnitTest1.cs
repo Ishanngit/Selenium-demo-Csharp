@@ -59,7 +59,7 @@ namespace CsharpSeleniumFramework.Tests
             // Navigate to browser
             driver.Value.Url = "https://practice.automationtesting.in/";
 
-            string[] ExpectedProducts = { "HTML5 Forms,Android Quick Start Guide" };
+            String[] ExpectedProducts = { "HTML5 Forms,Android Quick Start Guide" };
             //Wait untill page load
 
             WebDriverWait wait = new WebDriverWait(driver.Value, TimeSpan.FromSeconds(200));
@@ -67,7 +67,14 @@ namespace CsharpSeleniumFramework.Tests
 
             // IList<IWebElement> products =  driver.FindElements(By.TagName("h3"));
             IWebElement products = driver.Value.FindElement(By.TagName("h3"));
-            
+
+            /*foreach (IWebElement product in products)
+            {
+                TestContext.Progress.WriteLine(product.FindElement(By.XPath("//ul[@class='products masonry-done']")).Text);
+
+
+
+            }*/
             if (products != null)
             {
                 // Product name is present on the page
@@ -78,11 +85,6 @@ namespace CsharpSeleniumFramework.Tests
                 // Product name is not found
                 Console.WriteLine("Product name is not present.");
             }
-            //scroll
-            
-            IWebElement scroll = driver.Value.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']"));
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver.Value;
-            js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
 
             driver.Value.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']")).Click();
             driver.Value.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
@@ -90,13 +92,13 @@ namespace CsharpSeleniumFramework.Tests
 
 
             //cart verificaion
-
             driver.Value.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
-            //driver.Navigate().Refresh();
-            IWebElement cartproduct = driver.Value.FindElement(By.XPath("//td[@class='product-name']"));
             driver.Value.Navigate().Refresh();
+            IWebElement cartproduct = driver.Value.FindElement(By.XPath("//a[@class='wpmenucart-contents']"));
+            IWebElement scroll = driver.Value.FindElement(By.XPath("//a[contains(@class,'checkout-button')]"));
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver.Value;
+            js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
             driver.Value.FindElement(By.XPath("//a[contains(@class,'checkout-button')]")).Click();
-             //Thread.Sleep(1000);
 
             
 

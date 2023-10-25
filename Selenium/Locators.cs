@@ -144,15 +144,15 @@ namespace Selenium
             driver.Url = "https://demoqa.com/buttons";
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(600));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("doubleClickBtn")));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("rightClickBtn")));
 
-            IWebElement elementToDoubleClick = driver.FindElement(By.Id("doubleClickBtn"));
+            IWebElement elementToRightClick = driver.FindElement(By.Id("rightClickBtn"));
 
             Actions actions = new Actions(driver);
 
             actions.ContextClick(elementToRightClick).Perform();
 
-            String clickmessage = driver.FindElement(By.Id("doubleClickMessage")).Text;
+            String clickmessage = driver.FindElement(By.Id("rightClickMessage")).Text;
 
             Assert.AreEqual(clickmessage, "You have done a right click");
             driver.Quit();

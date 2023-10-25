@@ -7,9 +7,9 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
-namespace Selenium_Window_Demo_2
+namespace MultiWindow
 {
-    class Selenium_Window_Demo_2
+    class MultiWindow
     {
         IWebDriver driver;
 
