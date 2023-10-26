@@ -65,6 +65,50 @@ namespace Selenium
                 driver.Quit();
             }
         }
+        [Test]
+        public void Child()
+        {
+            driver.Url = "https://www.tools4testing.com/contents/selenium/testpages/xpath-axes-testpage";
 
+            driver.FindElement(By.XPath("//form[@id='form']/child::input[9]")).SendKeys("Test");
+
+            driver.Quit();
+        }
+        [Test]
+        public void descendant()
+        {
+            driver.Url = "https://www.tools4testing.com/contents/selenium/testpages/xpath-axes-testpage";
+
+            driver.FindElement(By.XPath("//descendant::input[5]")).SendKeys("Test");
+            driver.Quit();
+
+        }
+        [Test]
+        public void precedingsibling()
+        {
+            driver.Url = "https://www.tools4testing.com/contents/selenium/testpages/xpath-axes-testpage";
+
+            driver.FindElement(By.XPath("//input[5]/preceding-sibling::input")).SendKeys("Test");
+            driver.Quit();
+
+        }
+        [Test]
+        public void follwoingsibling()
+        {
+            driver.Url = "https://www.tools4testing.com/contents/selenium/testpages/xpath-axes-testpage";
+
+            driver.FindElement(By.XPath("//input[5]/following-sibling::input")).SendKeys("Test");
+            driver.Quit();
+
+        }
+        [Test]
+        public void parent()
+        {
+            driver.Url = "https://www.tools4testing.com/contents/selenium/testpages/xpath-axes-testpage";
+
+            driver.FindElement(By.XPath("//descendant::input[5]/parent::form"));
+            driver.Quit();
+
+        }
     }
-}
+    }

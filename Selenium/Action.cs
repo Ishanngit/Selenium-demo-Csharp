@@ -119,10 +119,18 @@ namespace Selenium
           
             String childwindow = driver.WindowHandles[1];
             driver.SwitchTo().Window(childwindow);
+     
+                // Use JavaScript to get the text content of the entire page
+                IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
+                string pageText = (string)jsExecutor.ExecuteScript("return document.documentElement.textContent");
 
-            string text = driver.FindElement(By.Id("sampleHeading")).Text;
+                // Print the extracted text
+             
+                TestContext.Progress.WriteLine(pageText);
+        
+           // string text = driver.FindElement(By.Id("sampleHeading")).Text;
 
-            TestContext.Progress.WriteLine(text);
+         //   TestContext.Progress.WriteLine(text);
 
             driver.Quit();
             }
