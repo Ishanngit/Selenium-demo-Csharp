@@ -15,39 +15,43 @@ using AventStack.ExtentReports;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium.DevTools.V116.Page;
-
-
+using OpenQA.Selenium.Support.UI;
+using CsharpSeleniumFramework.PageObject;
 
 namespace CsharpSeleniumFramework.Utilities
 {
-    internal class BaseClass
+    public class BaseClass
     {
-        ExtentReports extent;
-        ExtentTest test;
         String browserName;
+        ExtentReport ExtentReport;
+        protected WaitsLogic WaitsLogic;
 
-
-        //Report file 
-        [OneTimeSetUp]
-        public void Setup()
+        public BaseClass()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            string reportPath = projectDirectory + "\\index.html";
-            var htmlreporter =  new ExtentHtmlReporter(reportPath);
-            extent = new ExtentReports();
-            extent.AttachReporter(htmlreporter);
-            extent.AddSystemInfo("Host name", "Local Host");
-            extent.AddSystemInfo("Environment", "QA");
-            extent.AddSystemInfo("Username ", "Ishan");
+            WaitsLogic = new WaitsLogic(); // Initialize the WaitsLogic object
         }
-       // public IWebDriver driver;
-        public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            ExtentReport = new ExtentReport();
+            ExtentReport.Setup();
+        }
+        public static IWebDriver driver;
+        private static WebDriverWait wait;
+        public void Waitpage()
+        {
+           
+            WaitsLogic = new WaitsLogic();
+        }
+
+
+        //  public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
         [SetUp]
 
         public void StartBrowser()
         {
-           test =  extent.CreateTest(TestContext.CurrentContext.Test.Name);
+          
             //configuration
             browserName = TestContext.Parameters["browserName"];
             if(browserName == null)
@@ -55,79 +59,41 @@ namespace CsharpSeleniumFramework.Utilities
                 browserName = ConfigurationManager.AppSettings["Browser"];
 
             }
-
-            
             InitBrowser(browserName);
-            driver.Value.Manage().Window.Maximize();
+            driver.Manage().Window.Maximize();
 
         }
-        public IWebDriver getDriver()
+       /* public IWebDriver getDriver()
         {
             return driver.Value;
-        }
+        }*/
 
         public void InitBrowser(string browserName)
         {   
-            switch(browserName)
-            {
-                case "  ":
-                        driver.Value = new FirefoxDriver();
-                        break;
-
-                case "Chrome":
-                        driver.Value = new ChromeDriver();
-                        break;
-                        
-                case "Edge":
-                        driver.Value = new EdgeDriver();
-                        break;
-            }
-                
-
+                    driver = browserName.ToLower() switch
+                    {
+                        "chrome" => new ChromeDriver(),
+                        "firefox" => new FirefoxDriver(),
+                        "edge" => new EdgeDriver(),
+                        _ => new ChromeDriver() // Use Chrome as the default browser
+                    };
+           
+            
+          
         }
-        public static JsonReader getDataParser()
-        {
-            return new JsonReader();
-        }
+    
         [TearDown]
         public void AfterTest()
 
         {
-            var status = TestContext.CurrentContext.Result.Outcome.Status;
-            var stackTrace = TestContext.CurrentContext.Result.StackTrace;
+          
+            ExtentReport.Teardown();
+           
+            driver.Quit();
 
-
-
-            DateTime time = DateTime.Now;
-            String fileName = "Screenshot_" + time.ToString("h_mm_ss") + ".png";
-
-            if (status == NUnit.Framework.Interfaces.TestStatus.Failed)
-            {
-
-                test.Fail("Test failed", captureScreenShot(driver.Value, fileName));
-                test.Log(Status.Fail, "test failed with logtrace" + stackTrace);
-
-            }
-            else if (status == NUnit.Framework.Interfaces.TestStatus.Passed)
-            {
-
-            }
-
-            extent.Flush();
-            driver.Value.Quit();
+          
         }
+        
 
-        public MediaEntityModelProvider captureScreenShot(IWebDriver driver, String screenShotName)
-
-        {
-            ITakesScreenshot ts = (ITakesScreenshot)driver;
-            var screenshot = ts.GetScreenshot().AsBase64EncodedString;
-
-            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
-
-
-
-
-        }
     }
 }

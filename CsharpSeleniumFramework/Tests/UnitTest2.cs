@@ -15,8 +15,9 @@ namespace CsharpSeleniumFramework.Tests
 {
     internal class UnitTest2 : BaseClass
     {
-
+        LoginPage loginPage = new LoginPage();
         [Test, Category("Smoke")]
+        
         //dotnet test projectpath.csproj  - all test
         //dotnet test projectpath.csproj  --TestCategory--Smoke --specfic
 
@@ -25,20 +26,17 @@ namespace CsharpSeleniumFramework.Tests
         public void LoginNew()
         {
             // Navigate to browser
-            driver.Value.Url = "https://practicetestautomation.com/practice-test-login/";
+            driver.Url = "https://practicetestautomation.com/practice-test-login/";
 
 
-            //Wait untill page load
+            /*//Wait untill page load
 
-            WebDriverWait wait = new WebDriverWait(driver.Value, TimeSpan.FromSeconds(200));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("username")));
+*/
+            //loginPage.wait();
 
-
-
-            LoginPage loginPage = new LoginPage(getDriver());
-            loginPage.validlogin("studnet", "password");
-
-
+            loginPage.login("studentname","password");
         }
 
 

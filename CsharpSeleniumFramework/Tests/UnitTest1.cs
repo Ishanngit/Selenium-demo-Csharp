@@ -37,18 +37,18 @@ namespace CsharpSeleniumFramework.Tests
         public void Login(string username , string password)
         {
             // Navigate to browser
-            driver.Value.Url = "https://practicetestautomation.com/practice-test-login/";
+            driver.Url = "https://practicetestautomation.com/practice-test-login/";
 
             
             //Wait untill page load
 
-            WebDriverWait wait = new WebDriverWait(driver.Value, TimeSpan.FromSeconds(200));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("username")));
 
             
 
-            LoginPage loginPage = new LoginPage(getDriver());
-            loginPage.validlogin(username, password);
+          //  LoginPage loginPage = new LoginPage(getDriver());
+         //   loginPage.validlogin(username, password);
 
 
         }
@@ -57,16 +57,16 @@ namespace CsharpSeleniumFramework.Tests
             public void Cart()
         {
             // Navigate to browser
-            driver.Value.Url = "https://practice.automationtesting.in/";
+            driver.Url = "https://practice.automationtesting.in/";
 
             String[] ExpectedProducts = { "HTML5 Forms,Android Quick Start Guide" };
             //Wait untill page load
 
-            WebDriverWait wait = new WebDriverWait(driver.Value, TimeSpan.FromSeconds(200));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//span[@class='cartcontents']")));
 
             // IList<IWebElement> products =  driver.FindElements(By.TagName("h3"));
-            IWebElement products = driver.Value.FindElement(By.TagName("h3"));
+            IWebElement products = driver.FindElement(By.TagName("h3"));
 
             /*foreach (IWebElement product in products)
             {
@@ -86,19 +86,19 @@ namespace CsharpSeleniumFramework.Tests
                 Console.WriteLine("Product name is not present.");
             }
 
-            driver.Value.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']")).Click();
-            driver.Value.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
-            driver.Value.Navigate().Refresh();
+            driver.FindElement(By.XPath("//a[@href='/?add-to-cart=160'][@rel='nofollow']")).Click();
+            driver.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
+            driver.Navigate().Refresh();
 
 
             //cart verificaion
-            driver.Value.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
-            driver.Value.Navigate().Refresh();
-            IWebElement cartproduct = driver.Value.FindElement(By.XPath("//a[@class='wpmenucart-contents']"));
-            IWebElement scroll = driver.Value.FindElement(By.XPath("//a[contains(@class,'checkout-button')]"));
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver.Value;
+            driver.FindElement(By.XPath("//span[@class='cartcontents']")).Click();
+            driver.Navigate().Refresh();
+            IWebElement cartproduct = driver.FindElement(By.XPath("//a[@class='wpmenucart-contents']"));
+            IWebElement scroll = driver.FindElement(By.XPath("//a[contains(@class,'checkout-button')]"));
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
-            driver.Value.FindElement(By.XPath("//a[contains(@class,'checkout-button')]")).Click();
+            driver.FindElement(By.XPath("//a[contains(@class,'checkout-button')]")).Click();
 
             
 
@@ -106,10 +106,10 @@ namespace CsharpSeleniumFramework.Tests
         }
         public static IEnumerable<TestCaseData> AddTestDataConfig()
         {
-            //yield return new TestCaseData("student", "Password123");
+            yield return new TestCaseData("student", "Password123");
            
-           yield return new TestCaseData(getDataParser().extractData("username"), getDataParser().extractData("password"));
-           yield return new TestCaseData("student11", "Passworda12a3");
+       //    yield return new TestCaseData(getDataParser().extractData("username"), getDataParser().extractData("password"));
+          // yield return new TestCaseData("student11", "Passworda12a3");
 
         }
     }
