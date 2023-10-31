@@ -109,8 +109,9 @@ namespace Selenium
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].scrollIntoView(true);", scroll);
 
-            driver.FindElement(By.XPath("//input[@id ='subjectsInput']")).SendKeys("Maths");
-
+            var subjectsInput = driver.FindElement(By.XPath("//input[@id ='subjectsInput']"));
+            subjectsInput.SendKeys("Maths");
+            subjectsInput.SendKeys(Keys.Enter);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.FindElement(By.XPath("//div[text()='Maths']")).Click();
             driver.Quit(); // 1 window close single window

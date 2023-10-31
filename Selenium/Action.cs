@@ -111,31 +111,62 @@ namespace Selenium
         public void PopUpWindow()
         {
 
-            driver.Url = "https://demoqa.com/browser-windows";
+            // Navigate to the URL
+            driver.Navigate().GoToUrl("https://demoqa.com/browser-windows");
 
-            driver.FindElement(By.Id("messageWindowButton")).Click();
-            Assert.AreEqual(2, driver.WindowHandles.Count);
-            //changing window
-          
-            String childwindow = driver.WindowHandles[1];
-            driver.SwitchTo().Window(childwindow);
-     
-                // Use JavaScript to get the text content of the entire page
-                IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
-                string pageText = (string)jsExecutor.ExecuteScript("return document.documentElement.textContent");
+            // Find and click the "New Tab" button
+            IWebElement newTabButton = driver.FindElement(By.Id("tabButton"));
+            newTabButton.Click();
 
-                // Print the extracted text
-             
-                TestContext.Progress.WriteLine(pageText);
-        
-           // string text = driver.FindElement(By.Id("sampleHeading")).Text;
-
-         //   TestContext.Progress.WriteLine(text);
-
-            driver.Quit();
+            // Switch to the new tab
+            string currentWindow = driver.CurrentWindowHandle;
+            foreach (string windowHandle in driver.WindowHandles)
+            {
+                if (windowHandle != currentWindow)
+                {
+                    driver.SwitchTo().Window(windowHandle);
+                    break;
+                }
             }
 
-            [Test]
+            // Perform actions on the new tab (e.g., get a message)
+            IWebElement messageElement = driver.FindElement(By.Id("sampleHeading"));
+            string message = messageElement.Text;
+            Console.WriteLine("Message in the new tab: " + message);
+
+            // Close the new tab and switch back to the original tab
+            driver.Close();
+            driver.SwitchTo().Window(currentWindow);
+
+            // Find and click the "New Window" button
+            IWebElement newWindowButton = driver.FindElement(By.Id("windowButton"));
+            newWindowButton.Click();
+
+            // Switch to the new window (popup)
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(driver => driver.WindowHandles.Count > 1);
+            foreach (string windowHandle in driver.WindowHandles)
+            {
+                if (windowHandle != currentWindow)
+                {
+                    driver.SwitchTo().Window(windowHandle);
+                    break;
+                }
+            }
+
+            // Perform actions on the new window (e.g., get a message)
+            IWebElement windowMessageElement = driver.FindElement(By.Id("sampleHeading"));
+            string windowMessage = windowMessageElement.Text;
+            Console.WriteLine("Message in the new window: " + windowMessage);
+
+            // Close the new window
+            driver.Close();
+
+            // Close the main window
+            driver.Quit();
+        }
+
+        [Test]
             public void PopupAssertion()
         {
 
