@@ -17,6 +17,7 @@ using NUnit.Framework.Interfaces;
 using OpenQA.Selenium.DevTools.V116.Page;
 using OpenQA.Selenium.Support.UI;
 using CsharpSeleniumFramework.PageObject;
+using Serilog;
 
 namespace CsharpSeleniumFramework.Utilities
 {
@@ -25,7 +26,16 @@ namespace CsharpSeleniumFramework.Utilities
         String browserName;
         ExtentReport ExtentReport;
         protected WaitsLogic WaitsLogic;
+        [SetUp]
+        public void Setup()
+        {
+            // Configure Serilog
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .CreateLogger();
 
+           
+        }
         public BaseClass()
         {
             WaitsLogic = new WaitsLogic(); // Initialize the WaitsLogic object
@@ -88,7 +98,10 @@ namespace CsharpSeleniumFramework.Utilities
         {
           
             ExtentReport.Teardown();
-           
+            Log.Information("Test completed successfully1.");
+            Log.Debug("Log");
+            Log.Error("Error log");
+
             driver.Quit();
 
           

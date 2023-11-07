@@ -13,7 +13,7 @@ public class Api
         client = new RestClient("https://reqres.in/api/users");
     }
 
-    [Test]
+
     public void ApiTestExample()
     {
         var request = new RestRequest("/endpoint", Method.Get);

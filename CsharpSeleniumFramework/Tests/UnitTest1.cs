@@ -59,7 +59,7 @@ namespace CsharpSeleniumFramework.Tests
             // Navigate to browser
             driver.Url = "https://practice.automationtesting.in/";
 
-            String[] ExpectedProducts = { "HTML5 Forms,Android Quick Start Guide" };
+            String[] ExpectedProducts = { "HTML5 Forms,Android Quick Start Guide" };    
             //Wait untill page load
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(200));
