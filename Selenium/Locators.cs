@@ -145,7 +145,7 @@ namespace Selenium
             driver.Url = "https://demoqa.com/buttons";
 
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(600));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("rightClickBtn")));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("rightClickBtn")));    
 
             IWebElement elementToRightClick = driver.FindElement(By.Id("rightClickBtn"));
 

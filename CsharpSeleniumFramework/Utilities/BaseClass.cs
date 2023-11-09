@@ -86,12 +86,12 @@ namespace CsharpSeleniumFramework.Utilities
                         "firefox" => new FirefoxDriver(),
                         "edge" => new EdgeDriver(),
                         _ => new ChromeDriver() // Use Chrome as the default browser
-                    };
-           
+                            };
+         
             
           
         }
-    
+        
         [TearDown]
         public void AfterTest()
 
