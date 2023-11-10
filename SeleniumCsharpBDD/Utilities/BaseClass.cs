@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 
 public class WebDriverManager
-{
+{   
     public IWebDriver Driver { get; private set; }
 
     public void StartBrowser()

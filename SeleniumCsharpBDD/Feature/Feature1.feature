@@ -1,11 +1,9 @@
-﻿Feature: Feature1
-
-
-
+﻿Feature: Selenium  Feature
     As a user,
-    I want to launch a browser,
-    So that I can interact with a web application.
+    I want to open a web page,
+    So that I can perform basic interactions with the page.
 
-    Scenario: Launch the Chrome browser
-        Given I launch the Chrome browser
-        Then the browser should be open
+    Scenario: Open a web page
+        Given I open the browser
+        When I navigate to "https://www.google.com"
+        Then the page should contain the text "Google"
